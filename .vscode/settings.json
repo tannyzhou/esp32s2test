@@ -1,0 +1,30 @@
+{
+  "C_Cpp.clang_format_style": "Visual Studio",
+  "editor.formatOnSave": false,
+  "[cpp]": {
+    "editor.quickSuggestions": true
+  },
+  "[c]": {
+    "editor.quickSuggestions": true
+  },
+  "C_Cpp.intelliSenseEngineFallback": "Enabled",
+  "idf.adapterTargetName": "esp32s2",
+  "idf.openOcdConfigs": [
+    "interface/ftdi/esp32_devkitj_v1.cfg",
+    "target/esp32s2.cfg"
+  ],
+  "idf.portWin": "COM15",
+  "files.associations": {
+    "*.inc": "c",
+    "esp_netif.h": "c",
+    "esp_netif_defaults.h": "c",
+    "tftlcdspi.h": "c",
+    "*.ipp": "c",
+    "netdb.h": "c",
+    "time.h": "c",
+    "string.h": "c",
+    "esp_https_ota.h": "c",
+    "appparameter.h": "c",
+    "esp_system.h": "c"
+  }
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>HUI 普通列表</title>
+<link rel="stylesheet" type="text/css" href="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/hui.css" />
+</head>
+<body style="background:#FFFFFF;">
+
+<div class="hui-wrap">
+	<div style="padding:10px;">
+        <div class="hui-swipe" id="swipe">
+            <div class="hui-swipe-items">
+                <div class="hui-swipe-item"><img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/wapid/new/image/2020031060854429.jpg"/></div>
+                <div class="hui-swipe-item"><img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/wapid/new/image/2020031050191429.jpg"/></div>
+                <div class="hui-swipe-item"><img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/wapid/new/image/2019071835552697.jpg"/></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hui-common-title" style="margin-top:25px;">
+		<div class="hui-common-title-line"></div>
+		<div class="hui-common-title-txt">公告</div>
+		<div class="hui-common-title-line"></div>
+    </div>
+    
+    <div class="hui-media-list" style="padding:10px;">
+        <ul>
+            <li>
+                <a href="javascript:hui.toast('hi...');">
+                    <div class="hui-media-list-img"><img src="http://sxmini.yihisxminiid.com/Uploads_Picture_2018-12-27_5c244983ade0a.jpg" /></div>
+                    <div class="hui-media-content">
+                        <h1>热门产品</h1>
+                        <p>历久弥坚，才显珍贵—SXmini SL Class</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:hui.toast('hi...');">
+                    <div class="hui-media-list-img"><img src="http://sxmini.yihisxminiid.com/Uploads_Picture_2018-12-27_5c2446a7255d0.jpg" /></div>
+                    <div class="hui-media-content">
+                        <h1>版本更新</h1>
+                        <p>SXmini SL Class_修复 short问题</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:hui.toast('hi...');">
+                    <div class="hui-media-list-img"><img src="http://sxmini.yihisxminiid.com/Uploads_Picture_2018-12-27_5c2447537f02b.jpg" /></div>
+                    <div class="hui-media-content">
+                        <h1>深圳展会</h1>
+                        <p>展会风采丨SXmini携新品SL Class隆重亮相深圳展会</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="hui-fooer-line"></div>
+<div id="hui-footer">
+    <a href="javascript:hui.open('demo_home.html');" id="nav-home">
+        <div class="hui-footer-icons"><img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/home.png"> </div>
+        <div class="hui-footer-text">首页</div>
+    </a>
+    <div style="width:33.3%; text-align:center;">
+        &nbsp;
+    </div>
+    <div style="width:33.3%; text-align:center;">
+        &nbsp;
+    </div>
+    <a href="javascript:hui.open('upload_script.html');" id="nav-my">
+        <div class="hui-footer-icons"><img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/up.png"></div>
+        <div class="hui-footer-text">升级</div>
+    </a>
+</div>
+<div id="footer-logo">
+    <a href="javascript:hui.open('demo_con.html');" id="nav-controller">
+	    <img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/login/%E5%85%AC%E5%8F%B8logo%20ok_338x338.jpg" />
+    </a>
+</div>
+<script src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/hui.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/wapid/new/hui-swipe.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+hui.ready(function(){
+    hui.getJSON(
+                'https://www.yihisxminiid.com/huijson',
+               
+                function (res) {
+                    var mglit = 0
+                    for(var p in res){//遍历json数组时
+                        mglit++
+                    }
+
+                    if(mglit-1 > 0){
+	                    hui('#nav-my').pointMsg('new',null,null,null,null,'1px');
+                    }
+                },
+                function (e) {
+                    hui.iconToast('读取消息失败', 'warn');
+                }
+            );
+});
+var swipe = new huiSwpie('#swipe');
+swipe.autoPlay = true;
+swipe.run();
+</script>
+</body>
+</html>

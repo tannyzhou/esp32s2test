@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>控制中心</title>
+    <link rel="stylesheet" type="text/css" href="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/hui.css" />
+</head>
+
+<body style="background:#FFFFFF;">
+
+    <div class="hui-wrap">
+        <div style="padding:10px;">
+            <div class="hui-swipe" id="swipe">
+                <div class="hui-swipe-items">
+                    <div class="hui-swipe-item"><img
+                            src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/wapid/new/image/2020031060854429.jpg" />
+                    </div>
+                    <div class="hui-swipe-item"><img
+                            src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/wapid/new/image/2020031050191429.jpg" />
+                    </div>
+                    <div class="hui-swipe-item"><img
+                            src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/wapid/new/image/2019071835552697.jpg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding:20px 28px;">
+            <button type="button" class="hui-button hui-button-large" id="btn1" style="margin-top:15px;">获取数据
+                GET</button>
+            <button type="button" class="hui-button hui-button-large" id="btn2" style="margin-top:15px;">发送数据
+                POST</button>
+            <button type="button" class="hui-button hui-button-large" id="btn5" style="margin-top:15px;">GET
+                JSON</button>
+            <button type="button" class="hui-button hui-button-large" id="btn6" style="margin-top:15px;">POST
+                数据形式为JSON</button>
+        </div>
+
+
+    </div>
+
+    <script type="text/javascript">
+        //创建窗口
+        function createWin() {
+            var view = hui.create('./demo/h5createwindow.html', {}, true, { name: 'hcoder', age: '3.0' });
+            console.log(JSON.stringify(view));
+            hui.toast('窗口创建成功 ^_^');
+            //hui.create()函数返回创建的窗口对象，默认只是创建窗口并不展示【即为预加载】，使用show方法可以打开窗口
+            //plus.webview.show(view);
+        }
+
+
+    </script>
+
+    <div class="hui-fooer-line"></div>
+    <div id="hui-footer">
+        <a href="javascript:hui.open('demo_home.html');" id="nav-home">
+            <div class="hui-footer-icons"><img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/home.png"> </div>
+            <div class="hui-footer-text">首页</div>
+        </a>
+        <div style="width:33.3%; text-align:center;">
+            &nbsp;
+        </div>
+        <div style="width:33.3%; text-align:center;">
+            &nbsp;
+        </div>
+        <a href="javascript:hui.open('upload_script.html');" id="nav-my">
+            <div class="hui-footer-icons"><img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/up.png"></div>
+            <div class="hui-footer-text">升级</div>
+        </a>
+    </div>
+    <div id="footer-logo">
+        <a href="javascript:hui.open('demo_con.html');" id="nav-controller">
+            <img src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/login/%E5%85%AC%E5%8F%B8logo%20ok_338x338.jpg" />
+        </a>
+    </div>
+    <script src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/hui.js" type="text/javascript"
+        charset="utf-8"></script>
+    <script src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/wapid/new/hui-swipe.js" type="text/javascript"
+        charset="utf-8"></script>
+    <script type="text/javascript" src="https://sxlogin.oss-cn-shenzhen.aliyuncs.com/HUI/hui-form.js"></script>
+    <script type="text/javascript">
+        hui.ready(function () {
+            hui.getJSON(
+                'https://www.yihisxminiid.com/huijson',
+
+                function (res) {
+                    var mglit = 0
+                    for (var p in res) {//遍历json数组时
+                        mglit++
+                    }
+
+                    if (mglit - 1 > 0) {
+                        hui('#nav-my').pointMsg('new',null,null,null,null,'1px');
+                    }
+                },
+                function (e) {
+                    hui.iconToast('读取消息失败', 'warn');
+                }
+            );
+        });
+        var swipe = new huiSwpie('#swipe');
+        swipe.autoPlay = true;
+        swipe.run();
+
+        hui('#btn1').click(function () {
+            hui.get(
+                '#',
+                function (res) {
+                    console.log(res);
+                    hui.toast(res);
+                },
+                function (e) {
+                    hui.iconToast('读取消息失败', 'warn');
+                }
+            );
+        });
+
+        hui('#btn2').click(function () {
+            hui.post(
+                '#',
+                { name: 'hcoder', age: 18 },
+                function (res) {
+                    console.log(res);
+                    hui.toast(res);
+                },
+                function (e) {
+                    hui.iconToast('读取消息失败', 'warn');
+                }
+            );
+        });
+
+        hui('#btn5').click(function () {
+            hui.getJSON(
+                '#',
+                function (res) {
+                    console.log(res);
+                    hui.toast(res.name + ' 版本 : ' + res.verson);
+                },
+                function (e) {
+                    hui.iconToast('读取消息失败', 'warn');
+                }
+            );
+        });
+
+        hui('#btn6').click(function () {
+            hui.ajax({
+                url: '#',
+                type: 'POST',
+                data: {
+                    //json形式的数据
+                    name: "hcoder",
+                    age: 13,
+                    sex: "男"
+                },
+                beforeSend: function () { hui.loading(); },
+                complete: function () { hui.closeLoading(); },
+                ContentType: "application/json",
+                success: function (res) {
+                    console.log(res);
+                    console.log(res.name);
+                },
+                error: function (e) {
+                    console.log(JSON.stringify(e));
+                    hui.iconToast('读取消息失败', 'warn');
+                },
+                backType: "JSON"
+            });
+        });
+    </script>
+</body>
+
+</html>
