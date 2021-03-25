@@ -18,6 +18,7 @@
 #include "nvs_flash.h"
 #include "esp_netif.h"
 #include "protocol_examples_common.h"
+#include "esp_heap_caps.h"
 
 #include <esp_http_server.h>
 #include "lwip/err.h"
@@ -47,6 +48,10 @@ static const char *TAG = "Sx750Main";
 #define EXAMPLE_ESP_WIFI_CHANNEL   11
 #define EXAMPLE_MAX_STA_CONN       10
 
+void heap_caps_alloc_failed_hook(size_t requested_size, uint32_t caps, const char *function_name)
+{
+  printf("%s was called but failed to allocate %d bytes with 0x%X capabilities. \n",function_name, requested_size, caps);
+}
 
 
 static void wifi_event_handler(void* arg, esp_event_base_t event_base,
@@ -124,7 +129,8 @@ void app_main(void)
     ESP_ERROR_CHECK(nvs_flash_init());
     ESP_ERROR_CHECK(esp_netif_init());
     ESP_ERROR_CHECK(esp_event_loop_create_default());
-
+    esp_err_t error = heap_caps_register_failed_alloc_callback(heap_caps_alloc_failed_hook);
+    void *ptr = heap_caps_malloc(2048, MALLOC_CAP_DEFAULT);
     /* This helper function configures Wi-Fi or Ethernet, as selected in menuconfig.
      * Read "Establishing Wi-Fi or Ethernet Connection" section in
      * examples/protocols/README.md for more information about this function.
